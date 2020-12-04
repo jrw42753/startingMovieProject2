@@ -37,5 +37,6 @@ out/
 .vscode/
 
 ### yml ###
-.yml
-.DS_Store
+/resources/
+*.yml
+/.DS_Store
