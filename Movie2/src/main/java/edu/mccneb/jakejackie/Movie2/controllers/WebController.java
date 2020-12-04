@@ -1,5 +1,8 @@
 package edu.mccneb.jakejackie.Movie2.controllers;
 
+import edu.mccneb.jakejackie.Movie2.Repository.MovieRepository;
+import edu.mccneb.jakejackie.Movie2.model.Movie;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,12 +11,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 @Controller
 public class WebController {
+
+    @Autowired
+    private MovieRepository movieRepository;
 
     @GetMapping("/example")
     public String example() {
@@ -42,8 +49,13 @@ public class WebController {
         return "securedPage";
     }
 
+
     @RequestMapping("/")
     public String index(Model model, Principal principal) {
+        List<Movie> movieList = new ArrayList<>();
+        movieList = movieRepository.getAllMovies();
+        model.addAttribute("movieList", movieList);
+
         return "index";
     }
 
