@@ -15,6 +15,11 @@ import java.util.Map;
 @Controller
 public class WebController {
 
+    @GetMapping("/example")
+    public String example() {
+        return "example";
+    }
+
     @RequestMapping("/securedPage")
     public String securedPage(Model model, Principal principal) {
         System.out.println(principal);
