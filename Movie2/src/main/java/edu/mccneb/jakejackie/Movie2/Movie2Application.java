@@ -21,8 +21,8 @@ public class Movie2Application {
 
 		return (args) -> {
 			// save a few Products
-			repository.save(new Movie("Forrest Gump", "Drama", "Man does stuff and he's in love with a girl"));
-			repository.save(new Movie("Titanic", "Drama", "The boat sinks"));
+			repository.save(new Movie("Forrest Gump"));
+			repository.save(new Movie("Titanic"));
 		};
 	}
 

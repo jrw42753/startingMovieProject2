@@ -1,10 +1,10 @@
 package edu.mccneb.jakejackie.Movie2.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Movie implements Serializable {
@@ -12,15 +12,46 @@ public class Movie implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-    private String name;
-    private String genre;
-    private String description;
+    private String movie;
+//    private String genre;
 
-    public Movie(){}
-    public Movie(String name, String genre, String description) {
-        this.name = name;
-        this.genre = genre;
-        this.description = description;
+    public Movie(){ movie = null; }
+    public Movie(String name) {
+        this.movie = movie;
+    }
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "movie_genre",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    private Set<Genre> genres = new HashSet<>();
+
+    public void addGenre(Genre genre) {
+        this.genres.add(genre);
+        genre.getMovies().add(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", movie='" + movie + '\'' +
+                ", genres=" + genres +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Movie movie1 = (Movie) o;
+        return Objects.equals(movie, movie1.movie);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(movie);
     }
 
     public Long getId() {
@@ -31,27 +62,19 @@ public class Movie implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getMovie() {
+        return movie;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMovie(String movie) {
+        this.movie = movie;
     }
 
-    public String getGenre() {
-        return genre;
+    public Set<Genre> getGenres() {
+        return genres;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
     }
 }
