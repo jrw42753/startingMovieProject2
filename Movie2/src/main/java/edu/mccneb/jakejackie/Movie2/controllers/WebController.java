@@ -52,8 +52,8 @@ public class WebController {
 
     @RequestMapping("/")
     public String index(Model model, Principal principal) {
-        List<Movie> movieList = new ArrayList<>();
-        movieList = movieRepository.getAllMovies();
+//        List<Movie> movieList = new ArrayList<>();
+        Iterable<Movie> movieList = movieRepository.findAll();
         model.addAttribute("movieList", movieList);
 
         return "index";
