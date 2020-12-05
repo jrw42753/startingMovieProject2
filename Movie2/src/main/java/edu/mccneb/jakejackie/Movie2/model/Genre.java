@@ -20,7 +20,7 @@ public class Genre implements Serializable {
     public Genre(String genre) { this.genre = genre; }
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "movie_genre",
+    @JoinTable(name = "genre_movie",
             joinColumns = @JoinColumn(name = "genre_id"),
             inverseJoinColumns = @JoinColumn(name = "movie_id")
     )

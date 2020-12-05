@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:insert="fragments :: header"></div>
+This is add.html <span th:text="${currentDate}"></span>
+<p>
+<form method="post" th:action="@{/add}" th:object="${movieDTO}">
+    <label for="movie">Movie:</label><input name="movie" type="text" th:field="*{movie}"/>
+    <label for="genresStr">Genres:</label><input name="genresStr" type="text" th:field="*{genresStr}"/>
+    <input type="submit">
+</form>
+</p>
+<div th:insert="fragments :: footer"></div>
+</html>

@@ -9,23 +9,24 @@ import java.util.Set;
 @Entity
 public class Movie implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String movie;
 //    private String genre;
+
+    @ManyToMany(mappedBy="movies")
+//    @JoinTable(name = "movie_genre",
+//            joinColumns = @JoinColumn(name = "movie_id"),
+//            inverseJoinColumns = @JoinColumn(name = "genre_id")
+//    )
+    private Set<Genre> genres = new HashSet<>();
 
     public Movie(){ movie = null; }
     public Movie(String name) {
         this.movie = movie;
     }
-
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "movie_genre",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "genre_id")
-    )
-    private Set<Genre> genres = new HashSet<>();
 
     public void addGenre(Genre genre) {
         this.genres.add(genre);
