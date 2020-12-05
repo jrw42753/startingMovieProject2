@@ -57,7 +57,7 @@ public class WebController {
     }
 
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String index(Model model, Principal principal) {
         Iterable<Movie> movieList = movieRepository.findAll();
         model.addAttribute("movieList", movieList);

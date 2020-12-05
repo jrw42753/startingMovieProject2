@@ -2,11 +2,11 @@ package edu.mccneb.jakejackie.Movie2.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@Entity
 public class Genre implements Serializable {
     private static final long serialVersionUID = 1L;
 

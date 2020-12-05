@@ -8,7 +8,9 @@
                 <li th:each="movie: ${movieList}">
                     <span th:text="${movie.movie}"></span>
                     <ul>
-                        <li th:text="${movie.genre}"></li>
+                        <li th:each="genre: ${movie.genres}">
+                            <span th:text="${genre.genre}"></span>
+                        </li>
                      </ul>
                 </li>
             </ol>
