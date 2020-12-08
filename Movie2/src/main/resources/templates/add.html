@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-
+<!-- I saw an error that included this when accessing http://localhost:8080/add
+An error happened during template parsing (template: "class path resource [templates/add.html]")
+adding MovieDTO movieDTO as a parameter to the @GetMapping method in the controller fixed this.
+-->
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:insert="fragments :: header"></div>
 This is add.html <span th:text="${currentDate}"></span>

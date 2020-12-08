@@ -23,7 +23,7 @@ import java.util.Map;
 @Controller
 public class WebController {
 
-    @Autowired
+    @Autowired // can also inject these with a constructor
     MovieService movieService;
 
     @Autowired
@@ -69,6 +69,14 @@ public class WebController {
     private void setCurrentDate(Model model) {
         String currentDate = (new Date()).toString();
         model.addAttribute("currentDate", currentDate);
+    }
+
+    @GetMapping("/add") // Created this method to view http://localhost:8080/add
+    public String add(Model model, Principal principal, MovieDTO movieDTO) {
+        Iterable<Movie> movieList = movieRepository.findAll();
+        model.addAttribute("movieList", movieList);
+
+        return "add";
     }
 
     @PostMapping("/add")
